@@ -1,0 +1,73 @@
+/*css初始化*/
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select{margin:0;padding:0}
+body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+a{color:#2d374b;text-decoration:none}
+a:hover{color:#cd0200;text-decoration:underline}
+em{font-style:normal}
+li{list-style:none}
+img{border:0;vertical-align:middle}
+table{border-collapse:collapse;border-spacing:0}
+p{word-wrap:break-word}
+
+/*头部*/
+header{
+    height:80px;
+    width: 100%;
+    background:  #6196ce;
+}
+header .head-box{
+    height:80px;
+    width:1200px;
+    color:#333;
+    margin: 0 auto;
+}
+header .head-img{
+    float: left;
+}
+header .head-img img{
+    height:80px;
+    width: 180px;
+    margin-right: 45px;
+}
+header .head-list{
+    float: left;
+}
+header .head-list li{
+    float: left;
+    height:80px;
+    line-height: 80px;
+    font-size: 18px;
+    width: 80px;
+    text-align: center;
+    cursor: pointer;
+}
+header .head-list li:hover{
+    background: #ccc;
+    color:#fff;
+    border: 0;
+}
+header .head-search{
+    float: right;
+    position: relative;
+}
+header .head-search .head-text{
+    height:40px;
+    width: 260px;
+    line-height: 40px;
+    padding-left: 10px;
+    font-size: 16px;
+    margin:20px 0;
+    border-radius: 20px;
+    border: 0;
+}
+header .head-search .head-btn{
+    height:40px;
+    width: 40px;
+    position: absolute;
+    right:0;
+    top:20px;
+    border-radius: 20px;
+    background: #6196ce;
+    border: #fff;
+    background-image: url('../img/search.png');
+}

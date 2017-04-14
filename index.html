@@ -2,34 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>狗眼电影</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body ng-app="myApp" ng-controller="myController">
     <header>
         <div class="head-box">
-            <a href="#/home" class="head-img">
-                <img src="img/logo.gif" alt="">
+            <a ui-sref="home"  ng-click="changeList(1)" class="head-img">
+                <img src="img/logo.png" alt="">
             </a>
             <div class="head-list">
                 <ul>
-                    <li>首页</li>
-                    <li>电影</li>
-                    <li>榜单</li>
-                    <li>热点</li>
+                    <li ng-class="{'head-active':listStatus==1}" ng-click="changeList(1)" ui-sref="home"><label >首页</label></li>
+                    <li ng-class="{'head-active':listStatus==2}" ng-click="changeList(2)" ui-sref="movie.now"><label>电影</label></li>
+                    <li ng-class="{'head-active':listStatus==3}" ng-click="changeList(3)"><label>榜单</label></li>
+                    <li ng-class="{'head-active':listStatus==4}" ng-click="changeList(4)"><label>热点</label></li>
                 </ul>
             </div>
             <form class="head-search">
-                <input class="head-text" type="text">
+                <input class="head-text" type="text" placeholder="找电影名、演员、导演名">
                 <input class="head-btn" type="button">
             </form>
         </div>
     </header>
-    <div class="container">
-
+    <div class="header-placeholder"></div>
+    <div class="container" ui-view>
     </div>
     <footer>
-
+        <p>@2017 勿忘初心 坚持不懈 </p>
+        <div>胖哥出品,必属废品</div>
     </footer>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/services/jsonpSer.js"></script>
+    <script src="js/controllers/home/movie.js"></script>
+    <script src="js/controllers/home/movieNow.js"></script>
+    <script src="js/controllers/home/movieNext.js"></script>
+    <script src="js/controllers/home/movieGood.js"></script>
 </body>
 </html>

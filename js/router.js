@@ -1,0 +1,27 @@
+app.config(function($stateProvider,$urlRouterProvider){
+    $stateProvider
+       .state('home',{
+           url:'./home',
+           templateUrl:'./tpl/home/home.html'
+       })
+       .state('movie',{
+           url:'./movie',
+           templateUrl:'./tpl/movie/movie.html',
+           controller:'movieController'
+       })
+       .state('movie.now',{
+           url:'/now',
+           templateUrl:'./tpl/movie/movie-now.html',
+           controller:'movieNowController'
+       })
+       .state('movie.next',{
+           url:'/next',
+           templateUrl:'./tpl/movie/movie-next.html',
+           controller:'movieNextController'
+       })
+       .state('movie.good',{
+           url:'/good',
+           templateUrl:'./tpl/movie/movie-good.html',
+           controller:'movieGoodController'
+       })
+});

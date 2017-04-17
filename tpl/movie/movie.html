@@ -1,8 +1,8 @@
 <div class="container-header">
        <ul>
-           <li><a ng-click="changeStatus(1)" ui-sref=".now"  ng-class= "{'active':status==1}">正在热映</a></li>
-           <li><a ng-click="changeStatus(2)" ui-sref=".next" ng-class="{'active':status==2}">即将上映</a></li>
-           <li><a ng-click="changeStatus(3)" ui-sref=".good" ng-class="{'active':status==3}">经典影片</a></li>
+           <li><a ng-click="changeStatus(1)" ui-sref="movie.now"  ng-class= "{'active':status==1}">正在热映</a></li>
+           <li><a ng-click="changeStatus(2)" ui-sref="movie.next" ng-class="{'active':status==2}">即将上映</a></li>
+           <li><a ng-click="changeStatus(3)" ui-sref="movie.good" ng-class="{'active':status==3}">经典影片</a></li>
        </ul>
    </div>
    <div class="container-item" ui-view>

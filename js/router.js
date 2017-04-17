@@ -1,11 +1,13 @@
 app.config(function($stateProvider,$urlRouterProvider){
+    $urlRouterProvider.otherwise("/home");
     $stateProvider
        .state('home',{
-           url:'./home',
+           url:'/home',
            templateUrl:'./tpl/home/home.html'
        })
        .state('movie',{
-           url:'./movie',
+           url:'/movie',
+           abstract:true,
            templateUrl:'./tpl/movie/movie.html',
            controller:'movieController'
        })

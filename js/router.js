@@ -1,16 +1,26 @@
 app.config(function($stateProvider,$urlRouterProvider){
     $urlRouterProvider.otherwise("/home");
     $stateProvider
-       .state('home',{
+        .state('home',{
            url:'/home',
            templateUrl:'./tpl/home/home.html'
        })
-       .state('movie',{
+        .state('movie',{
            url:'/movie',
            abstract:true,
            templateUrl:'./tpl/movie/movie.html',
            controller:'movieController'
        })
+        .state('detail',{
+            url:'/detail?id',
+            templateUrl:'./tpl/detail/detail.html',
+            controller:'detailController'
+        })
+        .state('search',{
+            url:'/search?content',
+            templateUrl:'./tpl/search/search.html',
+            controller:'searchController'
+        })
        .state('movie.now',{
            url:'/now',
            templateUrl:'./tpl/movie/movie-now.html',
@@ -26,4 +36,5 @@ app.config(function($stateProvider,$urlRouterProvider){
            templateUrl:'./tpl/movie/movie-good.html',
            controller:'movieGoodController'
        })
+
 });

@@ -1,11 +1,11 @@
-app.controller('movieGoodController',function($scope,jsonpSer){
+app.controller('searchController',function($scope,jsonpSer,$stateParams){
     $scope.pageNow = 0;
     $scope.page = 1;
     function init(){
         $scope.showF = true;
         jsonpSer.jsonP(
-            'http://api.douban.com/v2/movie/top250',
-            {start:$scope.pageNow,count:12},
+            'http://api.douban.com/v2/movie/search',
+            {q:$stateParams.content},
             function(data){
                 $scope.data = data;
                 $scope.total = data.total;

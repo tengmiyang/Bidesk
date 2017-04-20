@@ -199,33 +199,49 @@ header .head-search .head-btn:hover{
     padding-top: 20px;
     min-width: 1200px;
     text-align: center;
+    position: relative;
+}
+.container-page-box{
+    width: 360px;
+    height:60px;
+    margin: 0 auto;
+}
+.container-page span{
+    font-size: 14px;
+    line-height: 30px;
+    float: left;
+    margin-top:20px;
 }
 .container-page ul{
     margin: 20px auto 0 ;
     display: inline-block;
+    float: left;
 }
 .container-page ul li{
     float: left;
     font-size: 14px;
-    padding: 5px 20px;
-    border: 1px solid #ccc;
     margin: 0 10px;
 }
-.container-page ul li:hover{
+.container-page ul li button{
+    background:#fff;
+    border: 1px solid #ccc;
+    padding: 5px 20px;
+}
+.container-page ul li button:hover{
+    border: 1px solid red;
     cursor: pointer;
 }
-.container-page ul li a:hover{
-    color: #333;
-    text-decoration: none;
+.container-page ul li .btn-none:hover{
+    border: 1px solid #ccc;
+    cursor: auto;
 }
-.container-page ul li:hover{
-    border: 1px solid #cd0200;
-}
+
 /*底部*/
 footer{
     background: #262426;
     margin-top: 70px;
     text-align: center;
+    min-width: 1200px;
     font-size: 16px;
     color: #666;
     padding: 56px 0;
@@ -299,12 +315,19 @@ footer p{
     position: fixed;
     background: rgba(100, 100, 100, 0.8);
     width: 100%;
-    top: 0;
+    top: 80px;
     left: 0;
     bottom: 0;
+    z-index: 1000;
+}
+.loading-fix{
+    position: fixed;
+    top:250px;
+    left: 50%;
+    margin-left: -40px;
+    z-index: 1001;
 }
 .sk-circle {
-    margin: 200px auto;
     width: 80px;
     height: 80px;
     position: relative;

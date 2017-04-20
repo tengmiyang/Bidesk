@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
     <title>狗眼电影</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
@@ -20,8 +21,8 @@
                 </ul>
             </div>
             <form class="head-search">
-                <input class="head-text" type="text" placeholder="找电影名、演员、导演名">
-                <input class="head-btn" type="button">
+                <input class="head-text" type="text" ng-model="content" placeholder="找电影名、演员、导演名">
+                <input class="head-btn" type="button" ng-click="noneC()" >
             </form>
         </div>
     </header>
@@ -41,5 +42,7 @@
     <script src="js/controllers/home/movieNow.js"></script>
     <script src="js/controllers/home/movieNext.js"></script>
     <script src="js/controllers/home/movieGood.js"></script>
+    <script src="js/controllers/detail/detail.js"></script>
+    <script src="js/controllers/search/search.js"></script>
 </body>
 </html>

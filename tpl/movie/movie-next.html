@@ -1,142 +1,44 @@
-<dl>
-    <dd>
+<dl class="clearfix">
+    <dd ng-repeat="item in data.subjects">
         <div class="container-img">
-            <a href="">
-                <img src="img/test.jpg" alt="">
+            <a ui-sref="detail({id:item.id})">
+                <img ng-src="{{item.images.large}}" alt="">
             </a>
         </div>
-        <div class="container-name">
-            <a href="">速度与激情</a>
+        <div class="container-name" ui-sref="detail({id:item.id})">
+            <a href="">{{item.title | limitTo:8}} <span ng-if="item.title.length>8">...</span>   </a>
         </div>
-        <div class="container-num">8.2</div>
-    </dd>
-    <dd>
-        <div class="container-img">
-            <a href="">
-                <img src="img/test.jpg" alt="">
-            </a>
-        </div>
-        <div class="container-name">
-            <a href="">速度与激情</a>
-        </div>
-        <div class="container-num">8.2</div>
-    </dd>
-    <dd>
-        <div class="container-img">
-            <a href="">
-                <img src="img/test.jpg" alt="">
-            </a>
-        </div>
-        <div class="container-name">
-            <a href="">速度与激情</a>
-        </div>
-        <div class="container-num">8.2</div>
-    </dd>
-    <dd>
-        <div class="container-img">
-            <a href="">
-                <img src="img/test.jpg" alt="">
-            </a>
-        </div>
-        <div class="container-name">
-            <a href="">速度与激情</a>
-        </div>
-        <div class="container-num">8.2</div>
-    </dd>
-    <dd>
-        <div class="container-img">
-            <a href="">
-                <img src="img/test.jpg" alt="">
-            </a>
-        </div>
-        <div class="container-name">
-            <a href="">速度与激情</a>
-        </div>
-        <div class="container-num">8.2</div>
-    </dd>
-    <dd>
-        <div class="container-img">
-            <a href="">
-                <img src="img/test.jpg" alt="">
-            </a>
-        </div>
-        <div class="container-name">
-            <a href="">速度与激情</a>
-        </div>
-        <div class="container-num">8.2</div>
-    </dd>
-    <dd>
-        <div class="container-img">
-            <a href="">
-                <img src="img/test.jpg" alt="">
-            </a>
-        </div>
-        <div class="container-name">
-            <a href="">速度与激情</a>
-        </div>
-        <div class="container-num">8.2</div>
-    </dd>
-    <dd>
-        <div class="container-img">
-            <a href="">
-                <img src="img/test.jpg" alt="">
-            </a>
-        </div>
-        <div class="container-name">
-            <a href="">速度与激情</a>
-        </div>
-        <div class="container-num">8.2</div>
-    </dd>
-    <dd>
-        <div class="container-img">
-            <a href="">
-                <img src="img/test.jpg" alt="">
-            </a>
-        </div>
-        <div class="container-name">
-            <a href="">速度与激情</a>
-        </div>
-        <div class="container-num">8.2</div>
-    </dd>
-    <dd>
-        <div class="container-img">
-            <a href="">
-                <img src="img/test.jpg" alt="">
-            </a>
-        </div>
-        <div class="container-name">
-            <a href="">速度与激情</a>
-        </div>
-        <div class="container-num">8.2</div>
-    </dd>
-    <dd>
-        <div class="container-img">
-            <a href="">
-                <img src="img/test.jpg" alt="">
-            </a>
-        </div>
-        <div class="container-name">
-            <a href="">速度与激情</a>
-        </div>
-        <div class="container-num">8.2</div>
-    </dd>
-    <dd>
-        <div class="container-img">
-            <a href="">
-                <img src="img/test.jpg" alt="">
-            </a>
-        </div>
-        <div class="container-name">
-            <a href="">速度与激情</a>
-        </div>
-        <div class="container-num">8.2</div>
+        <div class="container-num"><span ng-if="item.rating.average!=0">{{item.rating.average}}</span> <span ng-if="item.rating.average==0">暂无评分</span></div>
     </dd>
 </dl>
 <div class="container-page">
-    <ul>
-        <li><a href="">first</a></li>
-        <li><a href="">上一页</a></li>
-        <li><a href="">下一页</a></li>
-        <li><a href="">last</a></li>
-    </ul>
+    <div class="container-page-box clearfix">
+        <span>当前为第 <strong>{{page}}</strong> 页,共 <strong>{{allPage}}</strong> 页</span>
+        <ul>
+            <li>
+                <button  ng-class="{'btn-none':page==1}" ng-disabled="page==1" ng-click="changePage(0)">上一页</button>
+            </li>
+            <li>
+                <button ng-class="{'btn-none':page==allPage}" ng-disabled="page==allPage" ng-click="changePage(1)">下一页</button>
+            </li>
+        </ul>
+    </div>
 </div>
+<div class="loading-relative" ng-if="showF"></div>
+<div class="loading-fix" ng-if="showF">
+    <div class="sk-circle">
+        <div class="sk-circle1 sk-child"></div>
+        <div class="sk-circle2 sk-child"></div>
+        <div class="sk-circle3 sk-child"></div>
+        <div class="sk-circle4 sk-child"></div>
+        <div class="sk-circle5 sk-child"></div>
+        <div class="sk-circle6 sk-child"></div>
+        <div class="sk-circle7 sk-child"></div>
+        <div class="sk-circle8 sk-child"></div>
+        <div class="sk-circle9 sk-child"></div>
+        <div class="sk-circle10 sk-child"></div>
+        <div class="sk-circle11 sk-child"></div>
+        <div class="sk-circle12 sk-child"></div>
+    </div>
+</div>
+

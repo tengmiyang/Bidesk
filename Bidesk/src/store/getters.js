@@ -1,0 +1,22 @@
+const getters = {
+  sidebar: state => state.app.sidebar,
+  visitedViews: state => state.app.visitedViews,
+  token: state => state.user.token,
+  projectId: state => state.project.projectId,
+  subProjectId: state => state.project.subProjectId,
+  publishProjectId: state => state.project.publishProjectId,
+  projectStatus: state => state.project.projectStatus,
+  statusChange: state => state.project.statusChange,
+  avatar: state => state.user.avatar,
+  name: state => state.user.name,
+  phone: state => state.user.phone,
+  company: state => state.user.company,
+  introduction: state => state.user.introduction,
+  status: state => state.user.status,
+  roles: state => state.user.roles,
+  setting: state => state.user.setting,
+  top_routers: state => state.permission.top_routers,
+  fixed_routers: state => state.permission.fixed_routers,
+  addRouters: state => state.permission.addRouters,
+}
+export default getters

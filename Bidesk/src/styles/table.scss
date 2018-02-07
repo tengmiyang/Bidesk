@@ -1,0 +1,84 @@
+//等分
+.el-row th, .el-row td {
+  //width: 50%;
+  text-align: center;
+  border: 0;
+  border-bottom: 1px solid #e6ebf5;
+  border-right: 1px solid #e6ebf5;
+}
+
+//不等分
+.el-row th {
+  width: 15%;
+}
+
+.el-row td {
+  width: 85%;
+}
+
+//共用
+.el-row table {
+  border-right: 0;
+  border-bottom: 0;
+  font-size: 14px;
+  color: #5a5e66;
+}
+
+.el-row th {
+  font-weight: 700;
+}
+
+//多媒体
+
+.dialog__coenter ul {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 0px;
+}
+
+.dialog__coenter td {
+  text-align: left;
+}
+
+.dialog__coenter td span {
+  padding: 0 0 0 1%;
+}
+
+.dialog__coenter ul li {
+  list-style: none;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  border-top: 1px solid #e6ebf5;
+}
+
+.dialog__coenter ul li:first-child {
+  border-top: 0 solid #e6ebf5;
+}
+
+.dialog__coenter ul li .el-button {
+  padding: 0 0 0 1%;
+}
+
+.app-container .el-table {
+  padding-top: 1px;
+}
+
+.project-container .el-form {
+  padding-top: 1px;
+}
+
+.project-container {
+  padding: 50px 2%;
+}
+
+@media only screen and (max-width: 1580px) {
+  .app_min {
+    margin-top: 20px
+  }
+}
+
+@media only screen and (min-width: 1581px) {
+  .app_min {
+    margin-top: 20px
+  }
+}

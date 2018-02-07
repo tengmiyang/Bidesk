@@ -1,0 +1,2309 @@
+guodl / guodl
+tangj / tangj
+tengmy / tengmy
+
+============================================公共部分============================================
+
+附件-上传：/AnnexController/api/upload.htm
+          传参：
+		  {
+			"file":{}  -------------------- 附件
+		  }
+
+		  返回:
+		  {
+				"state": true,
+				"msg": null,
+				"data": "eyJhbGciOiJIUzM4N"   --------------------------  fileToken
+			}
+
+
+附件-获取实际信息：/AnnexController/api/getFileRealInfo.htm
+					传参：
+					{
+						"fileToken":"eyJhbGciOiJIUzM4N"  --------------------------  fileToken
+					}
+
+					返回：
+					{
+						"state": true,
+						"msg": null,
+						"data": {
+							"filePath": "BideskNewAnnex\\2017\\12\\06\\澄清答疑#-BideskNew-#d6cc45161.pdf",
+							"fileName": "澄清答疑（空调水处理服务项目）.pdf"
+						}
+					}
+
+附件-下载：/AnnexController/api/downloadFile.htm
+			传参：
+			{
+				"annexId":1  ------------------附件ID
+			}
+
+菜单上显示的数量：/ProjectController/api/numOfMenu.htm
+			参数：
+			{
+				"projectId":1428
+			}
+			返回：
+			{
+				"state": true,
+				"msg": null,
+				"data": {
+					"purResultNoticeNum": 0,  ------------------采购结果公告
+					"qaNum": 2,  ------------------澄清答疑回复文件
+					"purDocNum": 4,  ------------------采购文件
+					"purNoticeNum": 1,  ------------------采购公告
+					"addNoticeNum": 2  ------------------补充公告
+				}
+			}
+			
+收取所有邮件：/MailController/api/getAllMail.htm
+			返回：
+			{
+				"state": true,
+				"msg": null,
+				"data": {
+					"draftList": [  --------------------草稿箱
+						{
+							"sender": null, 
+							"receiver": "784661278 <784661278@qq.com>",  --------------------收件人
+							"subject": "草稿箱邮件",  --------------------主题
+							"time": 1516688982000  --------------------时间
+						}
+					],
+					"inboxList": [  --------------------收件箱
+						{
+							"sender": "wangrui_hq <wangrui_hq@mail.notes.bank-of-china.com>",  --------------------发件人
+							"receiver": null,
+							"subject": "答复:  关于无法收到Bidesk短信通知的解决方案",
+							"time": 1514357518000
+						}
+					],
+					"outboxList": [  --------------------发件箱
+						{
+							"sender": null,
+							"receiver": "wangrui_hq <wangrui_hq@mail.notes.bank-of-china.com>",
+							"subject": "关于无法收到Bidesk短信通知的解决方案",
+							"time": 1514354273000
+						}
+					]
+				}
+			}
+
+
+============================================采购立项============================================
+
+初始化数据：/ProjectController/api/newProject.htm
+
+提交数据：/ProjectController/api/saveProject.htm
+			{
+				"coreProject":{
+					"projectName":"项目名称",
+					"projectNum":"项目编号",
+					"projectMethodDicId":"采购方式的ID",
+					"isAgent":"是否委托代理机构（1：委托代理   2：自行采购）",
+					"projectLetter":"委托函"
+				},
+				"coreProjectEntrust":{
+					"entrustUserId":"被委托人ID"
+				}
+
+			}
+
+
+============================================待受理项目============================================
+列表数据：/ProjectController/api/acceptProject.htm
+
+详细页面：/ProjectController/api/acceptProjectDetail.htm
+			{
+				"projectId":"项目ID",
+			}
+
+接受操作：/ProjectController/api/acceptProjectYes.htm
+			{
+				"projectId":"项目ID"
+			}
+
+不接受操作：/ProjectController/api/acceptProjectNo.htm
+			{
+				"projectId":"项目ID",
+				"noAcceptReason":"不接受的原因"
+			}
+
+
+
+
+============================================前期准备项目============================================
+列表数据：/ProjectController/api/prepareProject.htm
+
+项目操作：/ProjectController/api/prepareProjectOperate.htm
+			传参:
+			{
+				"projectId":"项目ID"
+			}
+
+			返回结果：
+			{
+				"state": true,
+				"msg": null,
+				"data": {
+					"hasNewSubPro": true,//是否有新增项目功能
+					"hasShowPack": false,//是否在列表中显示包件信息
+					"projectDetail": [
+						{
+							"pro_name": "A有子项，有包件，都初始化",---------------立项名称
+							"pro_num": "项目编号",---------------立项编号
+							"pack_num": "1",---------------包件编号
+							"pack_name": null,---------------包件名称
+							"sub_pro_num": "1",---------------采购项目编号
+							"pack_id": 1,---------------包件ID
+							"sub_pro_name": "1",---------------采购项目名称
+							"pack_state": "0",---------------包件状态
+							"pro_id": 68,---------------立项ID
+							"sub_pro_id": 1---------------采购项目ID
+						},
+						{
+							"pro_name": "A有子项，有包件，都初始化",
+							"pro_num": "项目编号",
+							"pack_num": null,
+							"pack_name": null,
+							"sub_pro_num": "2",
+							"pack_id": 81,
+							"sub_pro_name": "2",
+							"pack_state": "0",
+							"pro_id": 68,
+							"sub_pro_id": 166
+						}
+					]
+				}
+			}
+
+
+项目操作-保存子项目：/ProjectController/api/prepareProjectSave.htm
+						{
+							"projectId":"大项目ID",
+							"projectName":"子项目名称",
+							"projectNum":"子项目编号"
+						}
+
+
+项目操作-移除子项目：/ProjectController/api/prepareProjectDel.htm
+						{
+							"projectId":"子项目ID"
+						}
+
+项目操作-修改子项目：/ProjectController/api/prepareProjectUpdate.htm
+						{
+							"projectId":"子项目ID",
+							"projectName":"子项目名称",
+							"projectNum":"子项目编号"
+						}
+
+关联邮件：/ProjectController/api/prepareProjectEmail.htm
+			{
+				"projectId":"子项目ID"
+			}
+
+
+关联邮件-初始化发布页面：/ProjectController/api/prepareProjectInitPublish.htm
+						传参：
+						{
+							"projectId":"项目ID"
+						}
+						返回：
+						{
+							"state": true,
+							"msg": null,
+							"data": {
+								"project": {
+									"projectId": 256,
+									"projectName": "采购项目名称",
+									"projectNum": "采购项目编号",
+									"projectMethodDicId": 3,  --------------------------  采购方式ID
+									"parentId": 88
+								},
+								"mediaList": [  --------------------------  媒体
+									{
+										"mediaId": 1,
+										"mediaName": "中国采购与招标网",
+										"mediaUrl": "www.chinabidding.cn"
+									},
+									{
+										"mediaId": 2,
+										"mediaName": "中国招投标网",
+										"mediaUrl": "www.infobidding.com"
+									}
+								],
+								"bidTypeList": [  --------------------------  采购类型
+									{
+										"dicId": 16,
+										"dicName": "货物招标"
+									},
+									{
+										"dicId": 17,
+										"dicName": "服务招标"
+									},
+									{
+										"dicId": 18,
+										"dicName": "工程招标"
+									}
+								],
+								"dicList": [  --------------------------  采购方式
+									{
+										"dicId": 2,
+										"dicName": "公开招标（资格后审）"
+									},
+									{
+										"dicId": 3,
+										"dicName": "公开招标（资格预审）"
+									},
+									{
+										"dicId": 4,
+										"dicName": "邀请招标"
+									},
+									{
+										"dicId": 5,
+										"dicName": "公开性竞争性谈判"
+									},
+									{
+										"dicId": 6,
+										"dicName": "邀请性竞争性谈判"
+									},
+									{
+										"dicId": 7,
+										"dicName": "公开性竞争性磋商"
+									},
+									{
+										"dicId": 8,
+										"dicName": "邀请性竞争性磋商"
+									},
+									{
+										"dicId": 9,
+										"dicName": "公开性询价"
+									},
+									{
+										"dicId": 10,
+										"dicName": "邀请性询价"
+									},
+									{
+										"dicId": 11,
+										"dicName": "单一来源"
+									},
+									{
+										"dicId": 12,
+										"dicName": "报名"
+									},
+									{
+										"dicId": 13,
+										"dicName": "公开性的其他采购方式"
+									},
+									{
+										"dicId": 14,
+										"dicName": "邀请性的其他采购方式"
+									}
+								]
+							}
+						}
+
+
+关联邮件-提交公告：/ProjectController/api/prepareProjectSaveNotice.htm
+					{
+						"coreProject": {
+							"bidTypeDicId": 3, --------------------------- 招标类型ID
+							"projectId": 265, --------------------------- 项目ID
+							"projectMethodDicId": 3, --------------------------- 采购方式ID
+							"projectName": "采购项目名称",
+							"projectNum": "采购项目编号",
+							"parentId":487 --------------------------- 大项目ID
+						},
+
+						defaultMediaList: [1, 2, 3],--------------------------- 媒体（直接选中复选框）
+						customMediaList: [--------------------------- 媒体，自行添加
+						{
+						  mediaName: "媒体名称1",
+						  mediaUrl: "媒体网站地址1"
+						},
+						{
+						  mediaName: "媒体名称2",
+						  mediaUrl: "媒体网站地址2"
+						}],
+
+						"noticeList": [{ --------------------------- 有多个公告
+							"notice": {
+								"noticeContent": "公告内容A",
+								"noticeName": "公告名称A",
+								"fileToken":"aasfasieoiwksdfasf"
+							},
+							"packNameList": ["包件名称A", "包件名称B"] --------------------------- 当前公告关联的包件名称
+						},
+						{
+							"notice": {
+								"noticeContent": "公告内容A",
+								"noticeName": "公告名称A"
+							},
+							"packNameList": ["包件名称C"]
+						}],
+
+
+						"packList": [{ --------------------------- 添加的多个包件
+							"packName": "包件名称A"
+						},
+						{
+							"packName": "包件名称B"
+						},
+						{
+							"packName": "包件名称C"
+						}]
+					}
+
+
+
+中止页面：/ProjectController/api/prepareProjectStop.htm
+			{
+				"projectId":"项目ID"
+			}
+
+
+中止页面-提交：/ProjectController/api/prepareProjectSaveStop.htm
+				{
+					"coreProject":{
+						"projectId":"项目ID",
+						"stopReason":"中止原因"
+					}
+				}
+
+
+
+============================================正在执行项目============================================
+列表数据：/ProjectController/api/executeProject.htm
+		传参：
+		{
+			"pageNum":1,
+			"projectName":"",
+			"projectNum":""
+		}
+
+发布采购公告：/ProjectController/api/executeProjectNotice.htm
+			{
+				"projectId":3
+			}
+
+发布采购公告-点击包件获取详情：/ProjectController/api/getNotice.htm
+						传参数：
+							{
+								"packId": "3"
+							}
+						返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": {
+									"notice": {
+										"noticeId": 1,
+										"noticeName": "阿斯蒂芬",
+										"noticeContent": "阿斯蒂芬爱的啊阿斯蒂芬爱的啊阿斯蒂芬爱的啊阿斯蒂芬爱的啊                            ",
+										"annexId": null,
+										"saleEndTime": null,
+										"submitEndTime": null,
+										"state": "1",
+										"createUserId": 260,
+										"createTime": "00:06:03",
+										"managerUserId": null,
+										"managerTime": null
+									},
+									"mediaList": [
+										{
+											"mediaRelation": {
+												"noticeMediaId": 1,
+												"noticeId": 1,
+												"mediaId": 1,
+												"annexId": 1
+											},
+											"media": {
+												"mediaId": 1,
+												"mediaName": "中国采购与招标网",
+												"mediaUrl": "www.chinabidding.cn",
+												"state": "1",
+												"createUserId": null,
+												"createTime": null
+											}
+										},
+										{
+											"mediaRelation": {
+												"noticeMediaId": 2,
+												"noticeId": 1,
+												"mediaId": 2,
+												"annexId": 1
+											},
+											"media": {
+												"mediaId": 2,
+												"mediaName": "中国招投标网",
+												"mediaUrl": "www.infobidding.com",
+												"state": "1",
+												"createUserId": null,
+												"createTime": null
+											}
+										}
+									]
+								}
+							}
+
+
+发布采购公告-初始化：/ProjectController/api/executeProjectDoc.htm
+					传参：
+					{
+						"projectId":256
+					}
+
+					返回：
+					{
+						"state": true,
+						"msg": null,
+						"data": {
+							"project": {
+								"projectName": "采购项目名称",
+								"projectNum": "采购项目编号"
+							},
+							"hasMorePack": true,  -------------------------------  是否是多包件
+							"purchaseDocList": [
+								{
+									"annexId": 1,  -------------------------------  附件ID，用于下载
+									"annexName": "采购文件.ZIP",  -------------------------------  采购文件
+									"packId": 102,  -------------------------------  所属包件ID
+									"saleEndTime": 1512532800000,  -------------------------------  发售截至时间
+									"submitEndTime": 1512716400000,  -------------------------------  递交响应文件截至时间
+									"contact": "张三",  -------------------------------  联系人
+									"phone": "1858493872",  -------------------------------  手机号
+									"createTime": 1512493140000  -------------------------------  起始发售时间
+								},
+								{
+									"docId": 2,
+									"annexId": 1,
+									"annexName": "气解决日趋.pdf",
+									"packId": 421,
+									"saleEndTime": 1512525600000,
+									"submitEndTime": 1513875600000,
+									"contact": "李四",
+									"phone": "1397543934",
+									"createTime": 1512489840000
+								}
+							],
+							"packList": [
+								{
+									"packId": 102,  -------------------------------  包件ID
+									"packName": "包件名称-AA",  -------------------------------  包件名称
+									"packNum": "1"  -------------------------------  包件编号
+								},
+								{
+									"packId": 421,
+									"packName": "包件名称-BB",
+									"packNum": "2"
+								},
+								{
+									"packId": 422,
+									"packName": "包件名称-CC",
+									"packNum": "3"
+								}
+							]
+						}
+					}
+
+
+
+上传采购文件-初始化：/ProjectController/api/executeProjectDoc.htm
+					传参：
+					{
+						"projectId":256
+					}
+					返回：
+					{
+						"state": true,
+						"msg": null,
+						"data": {
+							"project": {
+								"projectName": "采购项目名称",
+								"projectNum": "采购项目编号"
+							},
+							"hasMorePack": true,  -------------------------------  是否是多包件
+							"purchaseDocList": [
+								{
+									"annexId": 1,  -------------------------------  附件ID，用于下载
+									"annexName": "采购文件.ZIP",  -------------------------------  采购文件
+									"packId": 102,  -------------------------------  所属包件ID
+									"saleEndTime": 1512532800000,  -------------------------------  发售截至时间
+									"submitEndTime": 1512716400000,  -------------------------------  递交响应文件截至时间
+									"contact": "张三",  -------------------------------  联系人
+									"phone": "1858493872",  -------------------------------  手机号
+									"createTime": 1512493140000  -------------------------------  起始发售时间
+								},
+								{
+									"docId": 2,
+									"annexId": 1,
+									"annexName": "气解决日趋.pdf",
+									"packId": 421,
+									"saleEndTime": 1512525600000,
+									"submitEndTime": 1513875600000,
+									"contact": "李四",
+									"phone": "1397543934",
+									"createTime": 1512489840000
+								}
+							],
+							"packList": [
+								{
+									"packId": 102,  -------------------------------  包件ID
+									"packName": "包件名称-AA",  -------------------------------  包件名称
+									"packNum": "1"  -------------------------------  包件编号
+								},
+								{
+									"packId": 421,
+									"packName": "包件名称-BB",
+									"packNum": "2"
+								},
+								{
+									"packId": 422,
+									"packName": "包件名称-CC",
+									"packNum": "3"
+								}
+							]
+						}
+					}
+
+
+
+上传采购文件-提交：/ProjectController/api/executeProjectSaveDoc.htm
+				传参:
+				{
+					"packIdList": [466,	467,468],  -------------------------------  关联的包件ID
+					"packPurchaseDoc": {
+						"contact": "联系人",
+						"fileToken": "fileToken",
+						"phone": "手机号",
+						"saleEndTime": "2017-12-10T17:00:00.000Z",  -------------------------------  发售截至时间
+						"submitEndTime": "2017-12-15T17:00:00.000Z"  -------------------------------  递交响应文件截至时间
+					}
+				}
+
+
+
+发布补充公告-初始化：/ProjectController/api/executeProjectAddNotice.htm
+				传参：
+				{
+					"projectId":256
+				}
+				返回：
+				{
+					"state": true,
+					"msg": null,
+					"data": {
+						"project": {
+							"projectId": 256,
+							"projectName": "采购项目名称",
+							"projectNum": "采购项目编号"
+						},
+						"hasMorePack": true, --------------------------- 是否包含多个包件
+						"packList": [ --------------------------- 包件信息
+							{
+								"packId": 102,
+								"packName": "包件名称A",
+								"packNum": "1"
+							},
+							{
+								"packId": 337,
+								"packName": "包件名称B",
+								"packNum": "2"
+							},
+							{
+								"packId": 338,
+								"packName": "包件名称C",
+								"packNum": "3",
+							}
+						],
+						"addNoticeNum": 0 --------------------------- 补充公告目前已添加的次数（用于公告名称中次数的自动增加）
+					}
+				}
+
+
+
+发布补充公告-提交：/ProjectController/api/executeProjectSaveAddNotice.htm
+				传参：
+				{
+					"notice": {
+						"fileToken": "附件token，暂时不传",
+						"noticeContent": "公告内容",
+						"noticeName": "补充公告名称",
+						"saleEndTime": "2017-12-08T17:00:00.000Z", --------------------------- 采购文件发售截止时间
+						"submitEndTime": "2017-12-15T10:00:00.000Z" --------------------------- 递交响应文件截止时间
+					},
+					"packIdList": [337, 338] --------------------------- 关联包件的ID
+				}
+
+
+上传澄清答疑回复文件-初始化：/ProjectController/api/executeProjectQa.htm
+							传参：
+								{
+									"projectId":467
+								}
+							返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": {
+									"project": {
+										"projectName": "采购项目名称",
+										"projectNum": "采购项目编号",
+
+									},
+									"hasMorePack": true,
+									"packList": [
+										{
+											"packId": 466,
+											"packName": "包件名称A",
+											"packNum": "1"
+										},
+										{
+											"packId": 467,
+											"packName": "包件名称B",
+											"packNum": "2"
+										}
+									]
+								}
+							}
+
+
+上传澄清答疑回复文件-提交：/ProjectController/api/executeProjectSaveQa.htm
+							传参：
+							{
+								"corePackQa": {
+									"fileToken": "token",
+									"saleEndTime":"2017-12-10T17:00:00.000Z",--------------------------- 采购文件发售截止时间
+									"submitEndTime": "2017-12-20T17:00:00.000Z"--------------------------- 递交响应文件截止时间
+								},
+								"packIdList": [466,	467,468] --------------------------- 关联包件的ID
+							}
+
+
+供应商通知-初始化：/ProjectController/api/executeSupplierMsgInit.htm
+					传参：
+					{
+						"projectId":256,
+						"currentProState":2   --------------------2:正在执行   3：已到期
+					}
+					返回：
+					{
+						"state": true,
+						"msg": null,
+						"data": {
+							"projectId": 255,
+							"projectName": "255采购项目名称",
+							"projectNum": "采购项目编号",
+							"hasMorePack": true,
+							"packList": [
+								{
+									"packId": 335,
+									"packName": "包件名称B",
+									"packNum": "2",
+									"passSupplierList": [
+										{
+											"enterId": 189,
+											"projectId": 255,
+											"packId": 335,
+											"supplierUserId": 261,
+											"supplierUserName": "丁志华(供4)",
+											"supplierUserPhone": "18066091359",
+											"supplierCompanyId": 3,
+											"supplierCompanyName": "供应商单位4",
+											"packNum": "2"
+										}
+									]
+								}
+							]
+						}
+					}
+
+
+供应商通知-发送短信：/ProjectController/api/executeSupplierMsgSend.htm
+					传参：
+					{
+						"templateId":4, --------------------------------- 短信类型ID
+						"msgContent":"短信内容", --------------------------------- 短信内容
+						"supplierIdMap":{ --------------------------------- 发送短信的供应商
+							"261":[335,336], --------------------------------- key：供应商ID   value：包件ID
+							"269":[335]
+						}
+					}
+
+
+
+已到期-文件汇总-供应商报名情况：/ProjectController/api/expireProjectEnter.htm
+
+已完结-文件汇总-供应商报名情况：/ProjectController/api/endProjectEnter.htm
+
+供应商报名情况-初始化：/ProjectController/api/executeProjectEnter.htm
+						传参：
+							{
+								"projectId":467
+							}
+						返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": {
+									"project": {
+										"projectName": "256采购项目名称",
+										"projectNum": "采购项目编号"
+									},
+									"hasMorePack": true,
+									"packList": [
+										{
+											"packId": 102,
+											"packName": "包件名称-AA",
+											"packNum": "1"
+											"waitSupplierList": [ ------------------------- 潜在供应商
+												{
+													"enterId": 162,
+													"packId": 102,
+													"supplierUserName": "林剑虹(供)",
+													"supplierUserPhone": "13951886556"
+													"supplierCompanyName": "供应商单位"
+												}
+											],
+											"backSupplierList": [], ------------------------- 退回供应商
+											"passSupplierList": [] ------------------------- 潜在响应人
+										}
+									]
+								}
+							}
+
+供应商报名情况-同意：/ProjectController/api/executeProjectEnterPass.htm
+					传参：
+					{
+						"supplierId":266,  ------------------------供应商ID
+						"packIdList":[102,421]  -------------------涉及到的包件ID集合
+					}
+
+
+
+供应商报名情况-退回：/ProjectController/api/executeProjectEnterBack.htm
+					传参：
+					{
+						"supplierId":266,  ------------------------供应商ID
+						"packIdList":[102,421]  -------------------涉及到的包件ID集合
+					}
+
+
+供应商报名情况-恢复：/ProjectController/api/executeProjectEnterWait.htm
+					传参：
+					{
+						"supplierId":266,  ------------------------供应商ID
+						"packIdList":[102,421]  -------------------涉及到的包件ID集合
+					}
+
+
+包件管理-初始化：/ProjectController/api/executeProjectPackList.htm
+				传参：
+				{
+					"projectId":256
+				}
+				返回：
+				{
+					"state": true,
+					"msg": null,
+					"data": {
+						"hasMorePack": true, --------------------------- 区分多包件和单包件情况
+						"packList": [
+							{
+								"packId": 102,
+								"packName": "包件名称A",
+								"packNum": "1"
+							},
+							{
+								"packId": 337,
+								"packName": "包件名称B",
+								"packNum": "2"
+							},
+							{
+								"packId": 338,
+								"packName": "包件名称C",
+								"packNum": "3"
+							}
+						]
+					}
+				}
+
+
+包件管理-提交：/ProjectController/api/executeProjectSaveNewPack.htm
+				传参：
+				{
+					"packNameList": ["包件名称-EE","包件名称-FF", "包件名称-GG"], -------- 只传客户端新增的包件，初始化的数据不传
+					"projectId": 256
+				}
+
+				
+文件汇总-澄清答疑：/ProjectController/api/executeQaList.htm
+				传参：
+				{
+					"projectId": 467
+				}
+
+
+
+文件汇总-补充公告：/ProjectController/api/executeProjectAddNoticeList.htm
+				传参：
+				{
+					"projectId": 467
+				}
+				返回：
+				{
+					"state": true,
+					"msg": null,
+					"data": {
+						"noticeList": [  ----------------------------------------  补充公告列表
+							{
+								"packNumList": [  ----------------------------------------  单个补充公告涉及的包件编号
+									"1",
+									"2",
+									"3"
+								],
+								"mediaList": [  ----------------------------------------  单个补充公告涉及的媒体
+									{
+										"mediaRelation": {
+											"noticeMediaId": 87,
+											"noticeId": 125,
+											"mediaId": 1,
+											"annexId": null
+										},
+										"media": {
+											"mediaId": 1,
+											"mediaName": "中国采购与招标网",
+											"mediaUrl": "www.chinabidding.cn",
+											"state": "1",
+											"createUserId": null,
+											"createTime": null
+										}
+									},
+									{
+										"mediaRelation": {
+											"noticeMediaId": 88,
+											"noticeId": 125,
+											"mediaId": 11,
+											"annexId": null
+										},
+										"media": {
+											"mediaId": 11,
+											"mediaName": "媒体名称",
+											"mediaUrl": "媒体网站地址",
+											"state": "2",
+											"createUserId": 260,
+											"createTime": 1512457218000
+										}
+									}
+								],
+								"publishUserName": "刘朴浩(代)",  ----------------------------------------  发布人
+								"notice": {
+									"sale_end_time": 1512752400000,  ----------------------------------------  发售截至时间
+									"notice_name": "补充公告名称CC",  ----------------------------------------  名称
+									"submit_end_time": 1513332000000,  ----------------------------------------  递交响应文件截止时间
+									"create_time": 1512632414000,  ----------------------------------------  发布时间
+									"notice_content": "公告内容asasd132132131d",  ----------------------------------------  内容
+									"annex_id": null  ----------------------------------------  附件ID
+								}
+							},
+							{
+								"packNumList": [
+									"1",
+									"2"
+								],
+								"mediaList": [
+									{
+										"mediaRelation": {
+											"noticeMediaId": 89,
+											"noticeId": 126,
+											"mediaId": 1,
+											"annexId": null
+										},
+										"media": {
+											"mediaId": 1,
+											"mediaName": "中国采购与招标网",
+											"mediaUrl": "www.chinabidding.cn",
+											"state": "1",
+											"createUserId": null,
+											"createTime": null
+										}
+									},
+									{
+										"mediaRelation": {
+											"noticeMediaId": 90,
+											"noticeId": 126,
+											"mediaId": 11,
+											"annexId": null
+										},
+										"media": {
+											"mediaId": 11,
+											"mediaName": "媒体名称",
+											"mediaUrl": "媒体网站地址",
+											"state": "2",
+											"createUserId": 260,
+											"createTime": 1512457218000
+										}
+									}
+								],
+								"publishUserName": "刘朴浩(代)",
+								"notice": {
+									"sale_end_time": 1512752400000,
+									"manager_user_id": null,
+									"notice_name": "补充公告名称BB",
+									"submit_end_time": 1513332000000,
+									"create_time": 1512632421000,
+									"state": "1",
+									"notice_content": "公告内容asasd132132131d",
+									"create_user_id": 260,
+									"manager_time": null,
+									"notice_id": 126,
+									"annex_id": null
+								}
+							},
+							{
+								"packNumList": [
+									"1"
+								],
+								"mediaList": [
+									{
+										"mediaRelation": {
+											"noticeMediaId": 91,
+											"noticeId": 127,
+											"mediaId": 1,
+											"annexId": null
+										},
+										"media": {
+											"mediaId": 1,
+											"mediaName": "中国采购与招标网",
+											"mediaUrl": "www.chinabidding.cn",
+											"state": "1",
+											"createUserId": null,
+											"createTime": null
+										}
+									},
+									{
+										"mediaRelation": {
+											"noticeMediaId": 92,
+											"noticeId": 127,
+											"mediaId": 11,
+											"annexId": null
+										},
+										"media": {
+											"mediaId": 11,
+											"mediaName": "媒体名称",
+											"mediaUrl": "媒体网站地址",
+											"state": "2",
+											"createUserId": 260,
+											"createTime": 1512457218000
+										}
+									}
+								],
+								"publishUserName": "刘朴浩(代)",
+								"notice": {
+									"sale_end_time": 1512752400000,
+									"manager_user_id": null,
+									"notice_name": "补充公告名称AA",
+									"submit_end_time": 1513332000000,
+									"create_time": 1512632429000,
+									"state": "1",
+									"notice_content": "公告内容asasd132132131d",
+									"create_user_id": 260,
+									"manager_time": null,
+									"notice_id": 127,
+									"annex_id": null
+								}
+							}
+						],
+						"project": {
+							"projectId": 467,
+							"projectName": "采购项目名称",
+							"projectNum": "采购项目编号",
+							"projectMethodDicId": 3,
+							"isAgent": null,
+							"projectInfo": null,
+							"annexId": null,
+							"projectLetter": null,
+							"createCompanyId": 2,
+							"createUserId": 260,
+							"createTime": 1512608324000,
+							"flag": "1",
+							"state": "2",
+							"entrustOperateUserId": null,
+							"entrustOperateTime": null,
+							"noAcceptReason": null,
+							"parentId": 466,
+							"bidTypeDicId": 3,
+							"stopUserId": null,
+							"stopTime": null,
+							"stopReason": null,
+							"endUserId": null,
+							"endTime": null
+						}
+					}
+				}
+				
+文件汇总-委托信息：/ProjectController/api/getProjectEntrustInfo.htm
+					传参：
+					{
+						"projectId":586
+					}
+
+============================================已到期项目============================================
+列表数据：/ProjectController/api/expireProject.htm
+
+操作功能-上传开标记录-初始化：/ProjectController/api/expireProjectRecordOpening.htm
+							传参：
+							{
+								"projectId":586
+							}
+							返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": {
+									"project": {
+										"projectId": 528,
+										"projectName": "有包件项目",
+										"projectNum": "采购项目编号"
+									},
+									"hasMorePack": true, --------------------- 是否是多包件
+									"packList": [
+										{
+											"packId": 562,
+											"packName": "包件名称A",
+											"packNum": "包件编号"
+											"bidRecordList": [ --------------------- 开标记录目录集合
+												{
+													"recordId": 11, --------------------- ID
+													"recordName": "投标人签到表", --------------------- 名称
+													"annexId": null, --------------------- 附件信息
+													"annexName": null,
+													"delRecord": false --------------------- true表示目录可以删除，false不可删除
+												},
+												{
+													"recordId": 12,
+													"recordType": "1",
+													"recordName": "投标文件密封性检查表",
+													"annexId": null,
+													"annexName": null,
+													"delRecord": false
+												}
+											]
+										},
+										{
+											"packId": 567,
+											"packName": "包件名称B",
+											"packNum": "2"
+											"bidRecordList": [
+												{
+													"recordId": 11,
+													"recordName": "投标人签到表",
+													"annexId": null,
+													"annexName": null
+												},
+												{
+													"recordId": 12,
+													"recordType": "1",
+													"recordName": "投标文件密封性检查表",
+													"annexId": null,
+													"annexName": null
+												}
+											]
+										},
+										{
+											"packId": 568,
+											"packName": "包件名称C",
+											"packNum": "3",
+											"bidRecordList": [
+												{
+													"recordId": 11,
+													"recordName": "投标人签到表",
+													"annexId": null,
+													"annexName": null
+												},
+												{
+													"recordId": 12,
+													"recordType": "1",
+													"recordName": "投标文件密封性检查表",
+													"annexId": null,
+													"annexName": null
+												}
+											]
+										}
+									]
+								}
+							}
+
+
+操作功能-上传开标记录-保存附件信息：/ProjectController/api/expireRecordOpeningSave.htm
+							传参：
+							{
+								"recordId":9694, ---------------------记录ID
+								"packIdList":[562,567,568], ---------------------涉及到的所有包件
+								"fileToken":"weruoijsoidjfios" ---------------------附件token
+							}
+
+
+操作功能-上传开标记录-删除附件：/ProjectController/api/expireRecordOpeningDel.htm
+							传参：
+							{
+								"recordId":9694, ---------------------记录ID
+								"packIdList":[562,567]---------------------涉及到的所有包件
+							}
+
+
+操作功能-上传开标记录-新增目录：/ProjectController/api/expireRecordOpeningNewRecord.htm
+							传参：
+							{
+								"recordName":"新增的目录",
+								"packIdList":[562,567]---------------------涉及到的所有包件
+							}
+							返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": {
+									"562": 11966,
+									"567": 11967
+								}
+							}
+
+
+操作功能-上传开标记录-删除目录：/ProjectController/api/expireRecordOpeningDelRecord.htm
+							传参：
+							{
+								"recordId":11481,
+								"packIdList":[562,567]
+							}
+
+
+
+操作功能-上传评审过程文件-初始化：/ProjectController/api/expireProjectRecordProcess.htm
+								传参：
+								{
+									"projectId":586
+								}
+								返回：（与开标记录json数据结构一样）
+
+
+
+操作功能-上传评审过程文件-保存附件信息：/ProjectController/api/expireRecordProcessSave.htm
+							传参：
+							{
+								"recordId":9694, ---------------------记录ID
+								"packIdList":[562,567,568], ---------------------涉及到的所有包件
+								"fileToken":"weruoijsoidjfios" ---------------------附件token
+							}
+
+
+操作功能-上传评审过程文件-删除附件：/ProjectController/api/expireRecordProcessDel.htm
+							传参：
+							{
+								"recordId":9694, ---------------------记录ID
+								"packIdList":[562,567,568] ---------------------涉及到的所有包件
+							}
+
+
+操作功能-上传评审过程文件-新增目录：/ProjectController/api/expireRecordProcessNewRecord.htm
+							传参：
+							{
+								"recordName":"新增的目录",
+								"packIdList":[562,567]---------------------涉及到的所有包件
+							}
+							返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": {
+									"562": 11966,
+									"567": 11967
+								}
+							}
+
+操作功能-上传评审过程文件-删除目录：/ProjectController/api/expireRecordProcessDelRecord.htm
+							传参：
+							{
+								"recordId":11481,
+								"packIdList":[562,567]
+							}
+
+							
+已到期-操作功能-延期-初始化：/ProjectController/api/expireAddNotice.htm
+
+操作功能-发布采购结果公告-初始化：/ProjectController/api/expireResultNoticeInit.htm
+							传参：
+							{
+								"projectId":528
+							}
+							返回：
+							{
+							"state": true,
+							"msg": null,
+							"data": {
+								"projectId": 617,
+								"projectName": "项目名称",
+								"projectNum": "项目编号",
+								"hasMorePack": true,--------------------是否是多包件
+								"packList": [
+									{
+										"packId": 622,
+										"packName": "包件名称",
+										"packNum": "包件编号",
+										"projectId": 617,
+										"noticeVO": {
+											"notice": {
+												"noticeId": 304,
+												"noticeName": "采购结果公告名称",
+												"noticeContent": "采购结果公告内容",
+												"annexId": null,
+												"annexName": null,
+												"annexUrl": null
+											},
+											"mediaList": [
+												{
+													"mediaRelation": {
+														"noticeMediaId": 234,
+														"noticeId": 304,
+														"mediaId": 1,
+														"annexId": null,
+														"annexUrl": null
+													},
+													"media": {
+														"mediaId": 1,
+														"mediaName": "中国采购与招标网",
+														"mediaUrl": "www.chinabidding.cn"
+													}
+												}
+											]
+										}
+									}
+								]
+							}
+						}
+
+
+操作功能-发布采购结果公告-提交：/ProjectController/api/expireResultNoticeSave.htm
+							传参：
+							{
+								"notice": {
+									"fileToken": "ijaosdjiqowasdfjaafe",
+									"noticeContent": "采购结果公告内容",
+									"noticeName": "采购结果公告名称"
+								},
+								"packIdList": [466,467]
+							}
+							返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": {
+									"466": {
+										"notice": {
+											"noticeId": 402,
+											"noticeName": "ABC123123as然而d采购结果公告名称AA",
+											"noticeContent": "ABC1阿萨德sdf采购结果公告内容asasd132132131d",
+											"annexId": null,
+											"annexName": null,
+											"annexToken": "ABC卡拉算了就当是jiqowasdfjaafe",
+											"annexUrl": null
+										},
+										"mediaList": [
+											{
+												"mediaRelation": {
+													"noticeMediaId": 281,
+													"noticeId": 402,
+													"mediaId": 1,
+													"annexId": null,
+													"annexUrl": null
+												},
+												"media": {
+													"mediaId": 1,
+													"mediaName": "中国采购与招标网",
+													"mediaUrl": "www.chinabidding.cn",
+													"state": "1",
+													"createUserId": null,
+													"createTime": null
+												}
+											},
+											{
+												"mediaRelation": {
+													"noticeMediaId": 286,
+													"noticeId": 402,
+													"mediaId": 41,
+													"annexId": null,
+													"annexUrl": null
+												},
+												"media": {
+													"mediaId": 41,
+													"mediaName": "媒体名称1",
+													"mediaUrl": "媒体网站地址1",
+													"state": "2",
+													"createUserId": 260,
+													"createTime": 1513156216000
+												}
+											}
+										]
+									},
+									"467": {
+										"notice": {
+											"noticeId": 402,
+											"noticeName": "ABC123123as然而d采购结果公告名称AA",
+											"noticeContent": "ABC1阿萨德sdf采购结果公告内容asasd132132131d",
+											"annexId": null,
+											"annexName": null,
+											"annexUrl": null
+										},
+										"mediaList": [
+											{
+												"mediaRelation": {
+													"noticeMediaId": 281,
+													"noticeId": 402,
+													"mediaId": 1,
+													"annexId": null,
+													"annexUrl": null
+												},
+												"media": {
+													"mediaId": 1,
+													"mediaName": "中国采购与招标网",
+													"mediaUrl": "www.chinabidding.cn",
+													"state": "1",
+													"createUserId": null,
+													"createTime": null
+												}
+											},
+											{
+												"mediaRelation": {
+													"noticeMediaId": 285,
+													"noticeId": 402,
+													"mediaId": 44,
+													"annexId": null,
+													"annexUrl": null
+												},
+												"media": null
+											},
+											{
+												"mediaRelation": {
+													"noticeMediaId": 286,
+													"noticeId": 402,
+													"mediaId": 41,
+													"annexId": null,
+													"annexUrl": null
+												},
+												"media": {
+													"mediaId": 41,
+													"mediaName": "媒体名称1",
+													"mediaUrl": "媒体网站地址1",
+													"state": "2",
+													"createUserId": 260,
+													"createTime": 1513156216000
+												}
+											}
+										]
+									}
+								}
+							}
+
+
+操作功能-发布采购结果公告-查询：/ProjectController/api/expireResultNoticeInit.htm
+							传参：
+							{
+								"packId":466
+							}
+							返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": {
+									"notice": {
+										"noticeId": 331,
+										"noticeName": "采购结果公告名称",
+										"noticeContent": "公告内容",
+										"annexName": null,  --------------- 附件名称
+										"annexUrl": null  ----------------- 附件下载地址
+									},
+									"mediaList": [  --------------- 媒体
+										{
+											"mediaRelation": {
+												"annexId": null,
+												"annexUrl":null --------------- 媒体对应截图的下载地址
+											},
+											"media": {  --------------- 媒体
+												"mediaName": "中国采购与招标网",
+												"mediaUrl": "www.chinabidding.cn"
+											}
+										},
+										{
+											"mediaRelation": {
+												"annexId": null,
+												"annexUrl":null
+											},
+											"media": {
+												"mediaName": "中国采购与招标网",
+												"mediaUrl": "www.chinabidding.cn"
+											}
+										}
+									]
+								}
+							}
+
+
+操作功能-录入采购结果-初始化：/ProjectController/api/expirePurchaseResultInit.htm
+							传参：
+							{
+								"projectId":467
+							}
+							返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": {
+									"projectId": 467,
+									"projectName": "467采购项目名称",
+									"projectNum": "采购项目编号",
+									"hasMorePack": true,
+									"packList": [
+										{
+											"packId": 466,
+											"packName": "包件名称A",
+											"packNum": "1",
+											"purResultList": [  -------------------------------- 采购结果记录
+												{
+													"resultId": 1,
+													"projectId": 467,
+													"packId": 466,
+													"resultState": "1",  ------------------- 0：无中标人  1：有中标人
+													"resultDetailList": [
+														{
+															"detailId": 1,
+															"resultId": 1,
+															"supplierCompanyId": 3,
+															"supplierCompanyName": "供应商单位",
+															"supplierUserId": 261,
+															"supplierUserName": "阿苏大",
+															"supplierUserPhone": "124125235423",
+															"bid": "1", -------------------------------0：中标   1：未中标
+															"bidState": "2", ------------------------------- 中标类型（1：文字  2：元  3：元/个）
+															"bidMoney": "6474883",------------------------------- 中标金额
+															"offerState": "2",------------------------------- 最终报价类型（1：文字  2：元  3：元/个）
+															"offerMoney": "7859993"------------------------------- 最终报价金额
+														},
+														{
+															"detailId": 2,
+															"resultId": 1,
+															"supplierCompanyId": 4,
+															"supplierCompanyName": "供应商单位2",
+															"supplierUserId": 262,
+															"supplierUserName": "私人购",
+															"supplierUserPhone": "456546345634",
+															"bid": "0",
+															"bidState": "2",
+															"bidMoney": "99999",
+															"offerState": "2",
+															"offerMoney": "8888"
+														}
+													]
+												}
+											]
+										},
+										{ -------------------------------------------------------------第一次操作是的数据
+											"packId": 467,
+											"packName": "包件名称B",
+											"packNum": "2",
+											"passSupplierList": [
+																	{
+																		"enterId": 189,
+																		"projectId": 255,
+																		"packId": 335,
+																		"supplierUserId": 261,
+																		"supplierUserName": "丁志华(供4)",
+																		"supplierUserPhone": "18066091359",
+																		"supplierCompanyId": 3,
+																		"supplierCompanyName": "供应商单位4",
+																		"packNum": "2"
+																	}
+																],
+											"purResultList": null  -------------------------- 若无采购结果记录，则显示 passSupplierList 数据
+										}
+									]
+								}
+							}
+
+
+操作功能-录入采购结果-提交：/ProjectController/api/expirePurchaseResultSave.htm
+						传参：
+						{
+							"packId":102,
+							"resultState":1,  --------------------------------- 有无中标人（0：无中标人  1：有中标人）
+							"resultDetailList":[
+								{
+									"enterId":184,  --------------------------------- enterId
+									"supplierUserName":"王恒刚(供2)",  --------------------------------- 联系人
+									"supplierUserPhone":"18066090370",  --------------------------------- 手机号
+									"bid":"1",  --------------------------------- 是否中标（0：未中标    1：中标）
+									"bidState":"2",  --------------------------------- 中标类型（1：文字  2：元  3：元/个）
+									"bidMoney":"10000001",  --------------------------------- 中标金额
+									"offerState":"2",  --------------------------------- 最终报价类型（1：文字  2：元  3：元/个）
+									"offerMoney":"20002"  --------------------------------- 最终报价金额
+								},
+								{
+									"enterId":186,
+									"supplierUserName":"丁志华(供4)",
+									"supplierUserPhone":"12345678",
+									"bid":"0",
+									"bidState":"",
+									"bidMoney":"",
+									"offerState":"2",
+									"offerMoney":"90009"
+								}
+								]
+						}
+
+						返回：
+						{
+							"state": true,
+							"msg": null,
+							"data": {  ----------------------------------------- 与初始化的数据结果一样
+								"resultId": 2,
+								"projectId": 256,
+								"packId": 102,
+								"resultState": "1",
+								"createUserId": 260,
+								"createTime": 1513910953901,
+								"resultDetailList": [
+									{
+										"detailId": 3,
+										"resultId": 2,
+										"supplierCompanyId": 4,
+										"supplierCompanyName": "供应商单位2",
+										"supplierUserId": 266,
+										"supplierUserName": "王恒刚(供2)",
+										"supplierUserPhone": "18066090370",
+										"bid": "1",
+										"bidState": "2",
+										"bidMoney": "10000001",
+										"offerState": "2",
+										"offerMoney": "20002",
+										"newUserId": null,
+										"newUserTime": null,
+										"enterId": 184
+									},
+									{
+										"detailId": 4,
+										"resultId": 2,
+										"supplierCompanyId": 3,
+										"supplierCompanyName": "供应商单位4",
+										"supplierUserId": null,
+										"supplierUserName": "丁志华(供4)",
+										"supplierUserPhone": "12345678",
+										"bid": "0",
+										"bidState": "",
+										"bidMoney": "",
+										"offerState": "2",
+										"offerMoney": "90009",
+										"newUserId": null,
+										"newUserTime": null,
+										"enterId": 186
+									}
+								]
+							}
+						}
+
+操作功能-上传质疑处理-初始化：/ProjectController/api/expireProjectQuestionInit.htm
+							传参：
+							{
+								"projectId":528
+							}
+							返回：-------------------------------------------------  数据结构
+							{
+							"state": true,
+							"msg": null,
+							"data": {
+								"project": {
+									"projectId": 617,
+									"projectName": "123",
+									"projectNum": "123",
+									"hasMorePack": true,
+									"packList": [
+										{
+											"packId": 622,
+											"packName": "1",
+											"packNum": "1",
+										}
+									]
+								},
+								"processList": [  ----------------------------------目录列表
+									{
+										"dicId": 44, ----------------------------------目录ID
+										"dicName": "质疑单位", ----------------------------------目录名称
+										"dicCode": null,
+										"parentId": 43,
+										"sort": "1",
+										"flag": "1",
+										"createUserId": null,
+										"createTime": null,
+										"modifyUserId": null,
+										"modifyTime": null,
+										"content": null,
+										"visibleState": "1"
+									},
+									{
+										"dicId": 45,
+										"dicName": "新的证据/证明",
+										"dicCode": null,
+										"parentId": 43,
+										"sort": "2",
+										"flag": "1",
+										"createUserId": null,
+										"createTime": null,
+										"modifyUserId": null,
+										"modifyTime": null,
+										"content": null,
+										"visibleState": "1"
+									},
+									{
+										"dicId": 46,
+										"dicName": "评委会复议情况",
+										"dicCode": null,
+										"parentId": 43,
+										"sort": "3",
+										"flag": "1",
+										"createUserId": null,
+										"createTime": null,
+										"modifyUserId": null,
+										"modifyTime": null,
+										"content": null,
+										"visibleState": "1"
+									},
+									{
+										"dicId": 47,
+										"dicName": "招标公司给采购人的建议",
+										"dicCode": null,
+										"parentId": 43,
+										"sort": "4",
+										"flag": "1",
+										"createUserId": null,
+										"createTime": null,
+										"modifyUserId": null,
+										"modifyTime": null,
+										"content": null,
+										"visibleState": "1"
+									},
+									{
+										"dicId": 48,
+										"dicName": "采购人的回复/确认",
+										"dicCode": null,
+										"parentId": 43,
+										"sort": "5",
+										"flag": "1",
+										"createUserId": null,
+										"createTime": null,
+										"modifyUserId": null,
+										"modifyTime": null,
+										"content": null,
+										"visibleState": "1"
+									},
+									{
+										"dicId": 49,
+										"dicName": "招标公司给质疑人的回复",
+										"dicCode": null,
+										"parentId": 43,
+										"sort": "6",
+										"flag": "1",
+										"createUserId": null,
+										"createTime": null,
+										"modifyUserId": null,
+										"modifyTime": null,
+										"content": null,
+										"visibleState": "1"
+									}
+								]
+							}
+							}
+
+
+操作功能-上传质疑处理-提交：/ProjectController/api/expireProjectQuestionSave.htm
+							传参：
+							{
+								"packIdList":[466,467],
+									"recordList":[
+										{
+											"recordName":"质疑单位",
+											"annexName":"xxxxxx有限公司"
+										},
+										{
+											"recordName":"新的证据/证明",
+											"fileToken":"jsjjiweiwjkew23778329hskkd"
+										},
+										{
+											"recordName":"评委会复议情况",
+											"fileToken":"jsjjiweiwjkew23778329hskkd"
+										}
+									]
+
+							}
+
+
+
+操作功能-上传踏勘澄清文件-初始化：/ProjectController/api/expireProjectSurveyInit.htm
+							传值：
+							{
+								"projectId":617
+							}
+							返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": {
+									"projectId": 617,
+									"projectName": "123",
+									"projectNum": "123",
+									"hasMorePack": true,
+									"packList": [
+										{
+											"packId": 622,
+											"packName": "1",
+											"packNum": "1",
+										}
+									]
+								}
+							}
+
+
+
+操作功能-上传踏勘澄清文件-提交：/ProjectController/api/expireProjectSurveySave.htm
+							参数：
+							{
+								"packIdList":[466,467],
+								"fileToken":"23423awefasdfas"
+							}
+
+
+
+操作功能-上传采购结果通知书-初始化：/ProjectController/api/expireResultAdviceNoteInit.htm
+							参数：
+							{
+								"projectId":256
+							}
+							返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": {
+									"projectId": 256,
+									"projectName": "256采购项目名称",
+									"projectNum": "采购项目编号",
+									"hasMorePack": true,
+									"packList": [
+										{
+											"packId": 102,
+											"packName": "包件名称-AA",
+											"packNum": "1",
+											"purResultList": [
+												{
+													"resultId": 22,
+													"projectId": 256,
+													"packId": 102,
+													"resultState": "1",
+													"createUserId": 260,
+													"createTime": 1513933433000,
+													"noticeState": "0",
+													"noticeUserId": null,
+													"noticeTime": null,
+													"bidDetailList": [ -------------------------------------- 中标供应商
+														{
+															"detailId": 21,
+															"resultId": 22,
+															"supplierCompanyId": 4,
+															"supplierCompanyName": "供应商单位2",
+															"supplierUserId": null,
+															"supplierUserName": "王恒刚(供2)2",
+															"supplierUserPhone": "180663090370",
+															"bid": "1",
+															"bidState": "2",
+															"bidMoney": "10000001",
+															"annexId": null,
+															"annexName": null,
+															"annexUrl": null
+														}
+													],
+													"noBidDetailList": [ -------------------------------------- 未中标供应商
+														{
+															"detailId": 21,
+															"resultId": 22,
+															"supplierCompanyId": 4,
+															"supplierCompanyName": "供应商单位2",
+															"supplierUserId": null,
+															"supplierUserName": "王恒刚(供2)2",
+															"supplierUserPhone": "180663090370",
+															"bid": "1",
+															"bidState": "2",
+															"bidMoney": "10000001",
+															"annexId": null,
+															"annexName": null,
+															"annexUrl": null
+														}
+													],
+													"hasUploadNotice": false -------------------------------------- 是否已上传通知书
+												}
+											]
+										},
+									]
+								}
+							}
+
+
+操作功能-上传采购结果通知书-初始化：/ProjectController/api/expireResultAdviceNoteSave.htm
+							参数：
+							{
+								"packId":102, --------------------------------- 包件ID
+								"resultDetailList":[
+										{
+											"detailId":3,  -----------------------------记录ID
+											"fileToken":"asdfasdfasdf" ------------------附件token
+										},
+										{
+											"detailId":4,
+											"fileToken":"asdfasdfasdf"
+										}
+									]
+							}
+							返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": {
+									"resultId": 22,
+									"projectId": 256,
+									"packId": 102,
+									"bidDetailList": [
+										{
+											"detailId": 21,
+											"resultId": 22,
+											"supplierCompanyId": 4,
+											"supplierCompanyName": "供应商单位2",
+											"supplierUserId": null,
+											"supplierUserName": "王恒刚(供2)2",
+											"supplierUserPhone": "180663090370",
+											"bid": "1",
+											"bidState": "2",
+											"bidMoney": "10000001",
+											"annexId": 1,
+											"annexName": "（未）中标通知书21.pdf",
+											"annexUrl": null
+										}
+									],
+									"noBidDetailList": [
+										{
+											"detailId": 21,
+											"resultId": 22,
+											"supplierCompanyId": 4,
+											"supplierCompanyName": "供应商单位2",
+											"supplierUserId": null,
+											"supplierUserName": "王恒刚(供2)2",
+											"supplierUserPhone": "180663090370",
+											"bid": "1",
+											"bidState": "2",
+											"bidMoney": "10000001",
+											"annexId": 1,
+											"annexName": "（未）中标通知书21.pdf",
+											"annexUrl": null
+										}
+									],
+									"hasUploadNotice": true
+								}
+							}
+
+操作功能-录入采购结果-提交：/ProjectController/api/expirePurchaseResultSave.htm
+
+
+
+操作功能-办结-初始化：/ProjectController/api/expireEndInit.htm
+					传参：
+					{
+						"projectId":528
+					}
+					返回：
+					{
+						"state": true,
+						"msg": null,
+						"data": {
+							"projectId": 528,
+							"projectName": "有包件项目",
+							"projectNum": "采购项目编号",
+							"hasMorePack": true,
+							"packList": [
+								{
+									"packId": 562,
+									"packName": "包件名称A",
+									"packNum": "1",
+									"stateName": "已到期" -------------------- 阶段
+								},
+								{
+									"packId": 567,
+									"packName": "包件名称B",
+									"packNum": "2",
+									"stateName": "已到期"
+								},
+								{
+									"packId": 568,
+									"packName": "包件名称C",
+									"packNum": "3",
+									"stateName": "已到期"
+								}
+							]
+						}
+					}
+
+
+操作功能-办结-提交：/ProjectController/api/expireEndSave.htm
+					传参：
+					{
+						"projectId":528
+					}
+					
+					
+
+文件汇总-采购结果公告：/ProjectController/api/expireResultNoticeList.htm
+					传参：
+					{
+						"projectId":796
+					}
+					
+
+
+
+文件汇总-采购结果：/ProjectController/api/expirePurchaseResultList.htm
+					传参：
+					{
+						"projectId":256
+					}
+					
+
+文件汇总-采购结果通知书：/ProjectController/api/expireResultAdviceNoteList.htm
+					传参：
+					{
+						"projectId":256
+					}
+					
+					
+
+文件汇总-踏勘澄清文件：/ProjectController/api/expireProjectSurveyList.htm
+					传参：
+					{
+						"projectId":729
+					}
+
+文件汇总-质疑处理：/ProjectController/api/expireQuestionList.htm
+				传参：
+				{
+					"projectId":729
+				}
+				返回：
+				{
+				"state": true,
+				"msg": null,
+				"data": {
+					"projectId": 729,
+					"projectName": "撒地方3",
+					"projectNum": "2345",
+					"hasMorePack": true,
+					"packList": [
+						{
+							"packId": 803,
+							"packName": "申达股份",
+							"packNum": "1",
+							"processList": [
+								{
+									"bidRecordList": [
+										{
+											"recordName": "新的证据/证明",
+											"recordSort": "1",
+											"annexId": 1,
+											"annexName": "temp而且饿啊.zip"
+										},
+										{
+											"recordName": "质疑单位",
+											"recordSort": "1",
+											"annexId": null,
+											"annexName": "电饭锅"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			}
+
+============================================已完结项目============================================
+列表数据：/ProjectController/api/endProject.htm
+
+
+
+
+
+============================================供应商============================================
+项目搜索-查询：/ProjectController/api/supplierSearchProject.htm
+				传参：
+				{
+					"projectName":"项目名称",
+					"projectNum":"项目编号"
+				}
+				返回：
+				{
+					"state": true,
+					"msg": null,
+					"data": [
+						{
+							"projectName": "无包件项目",
+							"projectNum": "KASDJFO-12342",
+							"companyName": "采购人单位",
+							"hasMorePack": false, -------------------------  是否是多包件
+							"packList": [
+								{
+									"packId": 501,
+									"packName": null,
+									"packNum": null
+								}
+							]
+						},
+						{
+							"projectName": "采购项目名称",
+							"projectNum": "采购项目编号",
+							"companyName": "采购人单位",
+							"hasMorePack": true,
+							"packList": [
+								{
+									"packId": 102,
+									"packName": "包件名称-AA",
+									"packNum": "1"
+								}
+							]
+						}
+					]
+				}
+
+
+供应商-关注：/ProjectController/api/supplierSearchProjectEnter.htm
+			传参：
+			{
+				"packIdList":[466,467,468]
+			}
+
+
+
+供应商-已关注项目：/ProjectController/api/supplierAlreadyEnter.htm
+					返回：
+					{
+						"state": true,
+						"msg": null,
+						"data": [
+							{
+								"projectId": 255,
+								"projectName": "255采购项目名称",
+								"projectNum": "采购项目编号"
+								"hasMorePack": true, -------------------------  是否是多包件
+								"packList": [ -------------------------  已经关注的包件
+									{
+										"packId": 336,
+										"packName": "包件名称C",
+										"packNum": "3"
+										"annexName": null,
+										"annexUrl": ""
+									}
+								],
+								"canEnterPackList": [ -------------------------  “增加关注”中显示的数据
+									{
+										"packId": 101,
+										"packName": "包件名称A",
+										"packNum": "1"
+									},
+									{
+										"packId": 335,
+										"packName": "包件名称B",
+										"packNum": "2"
+									}
+								]
+							}
+						]
+					}
+
+
+供应商-已关注项目-增加关注：/ProjectController/api/supplierAlreadyEnterAdd.htm
+							传参：
+							{
+								"packIdList":[466,467,468]
+							}
+
+
+
+供应商-已关注项目-取消关注：/ProjectController/api/supplierAlreadyEnterCancel.htm
+							传参：
+							{
+								"packIdList":[466,467,468]
+							}
+
+
+供应商-正在执行项目：/ProjectController/api/supplierPassProject.htm
+							传参：无
+							返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": [
+									{
+										"projectName": "项目名称",
+										"projectNum": "项目编号",
+										"hasMorePack": false, ----------------------是否是多包件
+										"packList": [
+											{
+												"packId": 569,
+												"annexName": null,
+												"annexUrl": ""
+											}
+									},
+									{
+										"projectName": "256采购项目名称",
+										"projectNum": "采购项目编号"
+										"hasMorePack": true,----------------------是否是多包件
+										"packList": [
+											{
+												"packId": 102,
+												"packName": "包件名称-AA",
+												"packNum": "1",
+												"annexName": null,
+												"annexUrl": ""
+											},
+											{
+												"packId": 421,
+												"packName": "包件名称-BB",
+												"packNum": "2",
+												"annexName": null,
+												"annexUrl": null
+											}
+										]
+									}
+								]
+							}
+
+
+供应商-正在执行项目-下载页面：/ProjectController/api/supplierPassProjectDownloadPage.htm
+							传参：
+							{
+								"packIdList":[466,467,468]
+							}
+							返回：
+							{
+								"state": true,
+								"msg": null,
+								"data": [
+									{
+										"packId": 466,
+										"packName": "包件名称A",
+										"packNum": "1",
+										"purchaseNotice": {  -------------------------------- 采购公告
+											"noticeId": 81,
+											"noticeName": "公告名称A",
+											"noticeContent": "公告内容A",
+											"annexName": null
+											"annexUrl": null,
+											"hasDownload": true  -------------------------------- 是否已经下载过
+										},
+										"purchaseDoc": {  -------------------------------- 采购文件
+											"docId": 6,
+											"annexName": "采购文件temp.zip"
+											"annexUrl": null,
+											"hasDownload": true  -------------------------------- 是否已经下载过
+										},
+										"addNoticeList": null,  -------------------------------- 补充公告
+										"qaList": null  -------------------------------- 澄清答疑
+									},
+									{
+										"packId": 467,
+										"packName": "包件名称B",
+										"packNum": "2",
+										"projectId": 467,
+										"createCompanyId": 2,
+										"createUserId": 260,
+										"createTime": 1512608324000,
+										"flag": "1",
+										"state": "2",
+										"saleEndTime": 1512925200000,
+										"submitEndTime": 1513789200000,
+										"stopUserId": null,
+										"stopTime": null,
+										"stopReason": null,
+										"noticePublishUserId": 260,
+										"noticePublishTime": 1512608324000,
+										"annexName": null,
+										"annexUrl": null,
+										"bidRecordList": null,
+										"waitSupplierList": null,
+										"backSupplierList": null,
+										"passSupplierList": null,
+										"purchaseNotice": {
+											"noticeId": 81,
+											"noticeName": "公告名称A",
+											"noticeContent": "公告内容A",
+											"annexId": null,
+											"saleEndTime": null,
+											"submitEndTime": null,
+											"state": "2",
+											"createUserId": 260,
+											"createTime": 1512608324000,
+											"managerUserId": null,
+											"managerTime": null,
+											"annexToken": null
+										},
+										"purchaseDoc": {
+											"docId": 7,
+											"annexId": 1,
+											"annexName": "采购文件temp.zip",
+											"packId": 467,
+											"saleEndTime": 1512925200000,
+											"submitEndTime": 1513357200000,
+											"contact": "联系人",
+											"phone": "手机号",
+											"createUserId": 260,
+											"createTime": 1512615575000,
+											"fileToken": null
+										},
+										"addNoticeList": null,
+										"qaList": null
+									}
+								]
+							}
+
+
+供应商-正在执行项目-下载页面-下载采购公告：/ProjectController/api/supplierDownloadPurchaseNotice.htm
+										传参：
+										{
+											"packId":466,  -------------- 包件ID
+											"moduleId":81  -------------- 采购公告ID
+										}
+
+
+供应商-正在执行项目-下载页面-下载采购文件：/ProjectController/api/supplierDownloadPurchaseDoc.htm
+										传参：
+										{
+											"packId":466,  -------------- 包件ID
+											"moduleId":81  -------------- 采购文件ID
+										}
+
+
+供应商-正在执行项目-下载页面-下载补充公告：/ProjectController/api/supplierDownloadAddNotice.htm
+										传参：
+										{
+											"packId":466,  -------------- 包件ID
+											"moduleId":81  -------------- 补充公告ID
+										}
+
+供应商-正在执行项目-下载页面-下载澄清答疑：/ProjectController/api/supplierDownloadQa.htm
+										传参：
+										{
+											"packId":466,  -------------- 包件ID
+											"moduleId":81  -------------- 澄清答疑ID
+										}
